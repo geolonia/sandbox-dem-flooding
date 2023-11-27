@@ -25,15 +25,16 @@ const layerProps = {
       const g = imageData.data[index + 1]
       const b = imageData.data[index + 2]
       // GSI definition
-      const alt = r > 127.99 ? 0 : (r * 256 * 256 + g * 256 + b) / 100
+      const nodata = r > 127.99
+      const alt = nodata ? 0 : (r * 256 * 256 + g * 256 + b) / 100
 
       imageData.data[index] = 0
       imageData.data[index + 1] = 0
-      imageData.data[index + 2] = 256
+      imageData.data[index + 2] = 255
       imageData.data[index + 3] = 0
 
       if (alt <= sea_level) {
-        imageData.data[index + 3] = 128
+        imageData.data[index + 3] = 126
       }
     }
 
@@ -42,7 +43,7 @@ const layerProps = {
         image: imageData,
         bounds: [west, south, east, north]
     });
-  }
+  },
 }
 
 let timer = null
@@ -67,6 +68,7 @@ map.once('load', () => {
     sliderValue.innerText = '+' + sea_level + 'm'
 
     throttle(() => overlay.setProps({
+      // レイヤーを選べばもっと高速化できるはず
       layers: [new deck.TileLayer({ ...layerProps, sea_level })],
     }))
   })
