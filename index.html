@@ -33,7 +33,15 @@
   </style>
 </head>
 <body>
-  <div id="map" data-hash="on" data-max-zoom="7" data-min-zoom="5"></div>
+  <div
+    id="map"
+    data-hash="on"
+    data-max-zoom="7"
+    data-min-zoom="5"
+    data-zoom="5"
+    data-lat="38.45"
+    data-lng="138.42"
+  ></div>
   <div id="range-wrap">
     <label for="slider">浸水深</label>
     <input type="range" id="slider" min="0" max="4000" value="0" step="1">
@@ -41,6 +49,6 @@
   </div>
   <script src="https://cdn.geolonia.com/v1/embed?geolonia-api-key=YOUR-API-KEY"></script>
   <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
-  <script type="module" src="./index.mjs"></script>
+  <script src="./index.js"></script>
 </body>
 </html>
