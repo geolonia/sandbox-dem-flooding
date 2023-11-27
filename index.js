@@ -66,7 +66,7 @@ map.once('load', () => {
 
   slider.addEventListener('input', (e) => {
     const sea_level = parseInt(e.target.value, 10)
-    sliderValue.innerText = sea_level + 'm'
+    sliderValue.innerText = '+' + sea_level + 'm'
 
     throttle(() => overlay.setProps({ layers: [new deck.TileLayer({ ...layerProps, sea_level })] }))
   })
