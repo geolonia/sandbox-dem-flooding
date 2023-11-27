@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浸水シミュレーション</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    #range-wrap {
+      position: fixed;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      bottom: 30px;
+      margin: 0 auto;
+      z-index: 1;
+      padding: 10px;
+      font-size: 32px;
+    }
+    #slider-value {
+      display: inline-block;
+      width: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map" data-hash="on" data-max-zoom="7" data-min-zoom="5"></div>
+  <div id="range-wrap">
+    <label for="slider">浸水深</label>
+    <input type="range" id="slider" min="0" max="4000" value="0" step="1">
+    <span id="slider-value">0m</span>
+  </div>
+  <script src="https://cdn.geolonia.com/v1/embed?geolonia-api-key=YOUR-API-KEY"></script>
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <script type="module" src="./index.mjs"></script>
+</body>
+</html>
