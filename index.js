@@ -65,14 +65,19 @@ map.once('load', () => {
 
   slider.addEventListener('input', (e) => {
     const sea_level = parseInt(e.target.value, 10)
-    sliderValue.innerText = '+' + sea_level.toLocaleString() + 'm'
+    const sigmoidValue = Math.round(sigmoid(sea_level, parseInt(slider.max, 10), 0.004, 2 * parseInt(slider.max, 10) / 3))
+    sliderValue.innerText = '+' + sigmoidValue.toLocaleString() + 'm'
 
     throttle(
       () => overlay.setProps({
         // レイヤーを選べばもっと高速化できるはず..?
-        layers: [new deck.TileLayer({ ...layerProps, sea_level })],
+        layers: [new deck.TileLayer({ ...layerProps, sea_level: sigmoidValue })],
       }),
       3,
     )
   })
 })
+
+function sigmoid(x, L = 1, k = 1, x0 = 0) {
+  return L / (1 + Math.exp(-k * (x - x0)));
+}
