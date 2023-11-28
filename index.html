@@ -18,21 +18,25 @@
     #range-wrap {
       position: fixed;
       width: 100%;
+      max-width: 360px;
       display: flex;
       justify-content: center;
-      bottom: 30px;
+      align-items: center;
+      bottom: 50px;
       margin: 0 auto;
       z-index: 10000;
       padding: 10px;
-      font-size: 32px;
+      font-size: 24px;
+      font-family: sans-serif;
+      background: rgba(255, 255, 255, 0.6);
     }
     #slider {
       margin: 0 10px;
-      width: 300px;
+      width: auto;
     }
     #slider-value {
       display: inline-block;
-      width: 50px;
+      font-size: 20px;
     }
   </style>
 </head>

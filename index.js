@@ -39,22 +39,22 @@ const layerProps = {
     }
 
     return new deck.BitmapLayer(props, {
-        data: null,
-        image: imageData,
-        bounds: [west, south, east, north]
+      data: null,
+      image: imageData,
+      bounds: [west, south, east, north]
     });
   },
 }
 
 let timer = null
-const throttle = (callback) => {
+const throttle = (callback, ms) => {
   if (timer) {
     clearTimeout(timer)
   }
   timer = setTimeout(() => {
     callback()
     timer = null
-  }, 2)
+  }, ms)
 }
 
 map.once('load', () => {
@@ -65,11 +65,14 @@ map.once('load', () => {
 
   slider.addEventListener('input', (e) => {
     const sea_level = parseInt(e.target.value, 10)
-    sliderValue.innerText = '+' + sea_level + 'm'
+    sliderValue.innerText = '+' + sea_level.toLocaleString() + 'm'
 
-    throttle(() => overlay.setProps({
-      // レイヤーを選べばもっと高速化できるはず
-      layers: [new deck.TileLayer({ ...layerProps, sea_level })],
-    }))
+    throttle(
+      () => overlay.setProps({
+        // レイヤーを選べばもっと高速化できるはず..?
+        layers: [new deck.TileLayer({ ...layerProps, sea_level })],
+      }),
+      3,
+    )
   })
 })
