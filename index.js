@@ -64,8 +64,8 @@ map.once('load', () => {
   map.addControl(overlay)
 
   slider.addEventListener('input', (e) => {
-    const sea_level = parseInt(e.target.value, 10)
-    const sigmoidValue = Math.round(sigmoid(sea_level, parseInt(slider.max, 10), 0.004, 2 * parseInt(slider.max, 10) / 3))
+    const value = parseInt(e.target.value, 10)
+    const sigmoidValue = Math.round(sigmoid(value, parseInt(slider.max, 10), 0.004, 2 * parseInt(slider.max, 10) / 3))
     sliderValue.innerText = '+' + sigmoidValue.toLocaleString() + 'm'
 
     throttle(
